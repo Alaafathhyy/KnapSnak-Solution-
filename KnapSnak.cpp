@@ -4,7 +4,8 @@
 #define  ll long long
 
 #include <bits/stdc++.h>
-
+/* solution of knapsnak problem 
+*/
 using namespace std;
 vector<int> vec;
 int const N=1e3*3;

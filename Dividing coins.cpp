@@ -12,7 +12,7 @@ int arr[105];
 int n;
 
 ll dp[105][N];
-ll alaa(int i, ll sum1) {
+ll go(int i, ll sum1) {
 
     if (i == n) {
         return abs(sum1);
@@ -21,7 +21,7 @@ ll alaa(int i, ll sum1) {
     if(~ret)
         return ret;
 
-    return ret =min(alaa(i+1,sum1+arr[i]),alaa(i+1,sum1-arr[i]));
+    return ret =min(go(i+1,sum1+arr[i]),go(i+1,sum1-arr[i]));
 }
 
 int main() {
@@ -36,6 +36,6 @@ int main() {
             cin >> arr[i];
             sum1 += arr[i];
         }
-        cout << alaa(0, 0) << endl;
+        cout << go(0, 0) << endl;
     }
 }

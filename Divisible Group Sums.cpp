@@ -12,7 +12,7 @@ int arr[205], m, d;
 int n;
 ll dp[205][15][205];
 
-ll alaa(int i, ll cnt, ll mod) {
+ll go(int i, ll cnt, ll mod) {
 
     if (mod == 0 && cnt == m)
         return 1;
@@ -22,7 +22,7 @@ ll alaa(int i, ll cnt, ll mod) {
     ll &ret = dp[i][cnt][mod];
     if (~ret)
         return ret;
-    return ret = alaa(i + 1, cnt + 1, (arr[i] % d + mod) % d) + alaa(i + 1, cnt, mod);
+    return ret = go(i + 1, cnt + 1, (arr[i] % d + mod) % d) + go(i + 1, cnt, mod);
 
 }
 
@@ -43,7 +43,7 @@ int main() {
         for (int j = 1; j <= q; ++j) {
             memset(dp, -1, sizeof(dp));
             cin >> d >> m;
-            cout << "QUERY " << j << ": " << alaa(0, 0, 0) << endl;
+            cout << "QUERY " << j << ": " << go(0, 0, 0) << endl;
 
         }
     }

@@ -1,0 +1,67 @@
+#define MOD 998244353
+#define  endll  "\n"
+#define  ll long long
+#define vi vector<int>
+#define vll vector<ll>
+#define pb push_back
+#define pll pair<ll,ll>
+
+#include <bits/stdc++.h>
+
+using namespace std;
+const int N = 1000001, M = 2 * N, SEGN = 2 << (32 - __builtin_clz(N));
+int arr[N] = {1, 2, 3}, n, m, k;
+int freq[101];
+
+bool valid() {
+    for (int i = 1; i <= k; i++) {
+        if (freq[i] <= 0)
+            return false;
+    }
+    return true;
+}
+
+void solve() {
+    memset(freq, 0, sizeof(freq));
+    int st = 0, ed = 0;
+    freq[1]++;
+    int ans = 1e9;
+    while (st < n - 1) {
+        if (!valid()) {
+            ed++;
+            if (ed >= n) break;
+            if (arr[ed] <= k)freq[arr[ed]]++;
+        } else {
+            ans = min(ans, ed - st + 1);
+            if (arr[st] <= k)
+                freq[arr[st]]--;
+            st++;
+            if (st >= n) break;
+        }
+    }
+    if(ans==1e9) cout<<"sequence nai"<<endll;
+    else cout<<ans<<endll;
+
+}
+
+int main() {
+    ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+#ifndef ONLINE_JUDGE
+    freopen("input", "rt", stdin);
+    freopen("output", "wt", stdout);
+#endif
+
+    int q;
+    cin >> q;
+    for (int t = 1; t <= q; t++) {
+        cin >> n >> m >> k;
+        for (int i = 3; i < n; i++) {
+            arr[i] = ((arr[i - 2] + arr[i - 1] + arr[i - 3]) % m) + 1;
+
+        }
+        cout << "Case " << t << ": ";
+        solve();
+
+
+    }
+}
